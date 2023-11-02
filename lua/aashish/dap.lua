@@ -23,6 +23,7 @@ dap.adapters.codelldb = {
     -- Don't forget to put -g while compiling 
   }
 }
+
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -36,6 +37,7 @@ dap.configurations.cpp = {
     runInTerminal = true,
   },
 }
+
 dap.configurations.c = dap.configurations.cpp
 
 --------------------------------------------------

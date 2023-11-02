@@ -1,4 +1,6 @@
 -- :help options
+vim.g.loaded_netrw = 1                          -- to use nvim-tree
+vim.g.loaded_netrwPlugin = 1                    -- disable netrwPlugin ofr nivm-tree
 vim.opt.backup = false                          -- creates a backup file
 vim.opt.clipboard = "unnamedplus"               -- allows neovim to access the system clipboard
 vim.opt.completeopt = { "menuone", "noselect" } -- mostly just for cmp

@@ -47,8 +47,11 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim"
   -- Useful lua functions used by lots of plugins
   use "nvim-lua/plenary.nvim"
-  -- Gruvbox theme which I'm liking alot
+
+  -- Theme 
   use { "ellisonleao/gruvbox.nvim" }
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use {'folke/tokyonight.nvim'}
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -93,10 +96,18 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
-  use { "nvim-telescope/telescope-file-browser.nvim" }
 
   -- Git related plugins
   use 'tpope/vim-fugitive'
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy',
+    config = function()
+      require("fidget").setup {
+        -- options
+      }
+    end,
+  }
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
@@ -120,6 +131,32 @@ return packer.startup(function(use)
   use {'akinsho/toggleterm.nvim', tag = '*' }
   -- autopairs brackets and stuff 
   use { "windwp/nvim-autopairs", config = function() require("nvim-autopairs").setup {} end}
+  -- TODO list and stuff
+  use {'phaazon/mind.nvim',branch = 'v2.2', config = function() require'mind'.setup() end}
+  use {'nvim-tree/nvim-tree.lua',requires = {'nvim-tree/nvim-web-devicons',}, tag = 'nightly'}
+  -- Flutter Development
+  use {'akinsho/flutter-tools.nvim', requires = 'nvim-lua/plenary.nvim'}
+
+  use {
+      "nvim-neorg/neorg",
+      config = function()
+          require('neorg').setup {
+              load = {
+                  ["core.defaults"] = {}, -- Loads default behaviour
+                  ["core.concealer"] = {}, -- Adds pretty icons to your documents
+                  ["core.dirman"] = { -- Manages Neorg workspaces
+                      config = {
+                          workspaces = {
+                              notes = "~/notes",
+                          },
+                      },
+                  },
+              },
+          }
+      end,
+      run = ":Neorg sync-parsers",
+      requires = "nvim-lua/plenary.nvim",
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
